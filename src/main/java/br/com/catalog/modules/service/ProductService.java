@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import br.com.catalog.modules.dto.ProductDTO;
+import br.com.catalog.modules.dto.ProductResponseDTO;
 import br.com.catalog.modules.entity.ProductEntity;
 import br.com.catalog.modules.repository.CategoryRepository;
 import br.com.catalog.modules.repository.ProductRepository;
@@ -23,14 +24,24 @@ public class ProductService {
     @Transactional
     public ProductEntity insert(ProductDTO dto) {
         ProductEntity product = new ProductEntity(dto);
-        var category = categoryRepository.findById(dto.categoryId());
+        var category = categoryRepository.findById(UUID.fromString(dto.categoryId()));
         product.setCategory(category);
         productRepository.persist(product);
         return product;
     }
 
-    public Optional<ProductEntity> findById(UUID id) {
-        var product = productRepository.findById(id);
+    @Transactional
+    public ProductResponseDTO update(String id, ProductDTO dto) {
+        ProductEntity product = productRepository.findById(UUID.fromString(id));
+
+        product.setTitle(dto.title());
+        product.setDescription(dto.description());
+
+        return new ProductResponseDTO(product);
+    }
+
+    public Optional<ProductEntity> findById(String id) {
+        var product = productRepository.findById(UUID.fromString(id));
         return Optional.of(product);
     }
 

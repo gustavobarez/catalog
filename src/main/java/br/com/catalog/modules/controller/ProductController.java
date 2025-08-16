@@ -7,7 +7,9 @@ import br.com.catalog.modules.dto.ProductResponseDTO;
 import br.com.catalog.modules.service.ProductService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -25,6 +27,14 @@ public class ProductController {
         URI location = URI.create("/api/product/" + product.getId());
         ProductResponseDTO dto = new ProductResponseDTO(product);
         return Response.created(location).entity(dto).build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(@PathParam("id") String id, ProductDTO productDTO) {
+        var dto = productService.update(id, productDTO);
+        return Response.ok(dto).build();
     }
 
 }

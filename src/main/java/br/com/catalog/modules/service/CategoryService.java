@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import br.com.catalog.modules.dto.CategoryDTO;
+import br.com.catalog.modules.dto.CategoryResponseDTO;
 import br.com.catalog.modules.entity.CategoryEntity;
 import br.com.catalog.modules.repository.CategoryRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -17,16 +18,30 @@ public class CategoryService {
     public CategoryRepository categoryRepository;
 
     @Transactional
-    public CategoryEntity insert(CategoryDTO categoryDTO) {
-        CategoryEntity categoryEntity = new CategoryEntity(categoryDTO);
+    public CategoryEntity insert(CategoryDTO dto) {
+        CategoryEntity categoryEntity = new CategoryEntity(dto);
 
         categoryRepository.persist(categoryEntity);
 
         return categoryEntity;
     }
 
-    public Optional<CategoryEntity> findById(UUID id) {
-        return Optional.of(this.categoryRepository.findById(id));
+    @Transactional
+    public CategoryResponseDTO update(String id, CategoryDTO dto) {
+        CategoryEntity category = categoryRepository.findById(UUID.fromString(id));
+        
+        // if (category == null) {
+        //     throw new
+        // }
+
+        category.setTitle(dto.title());
+        category.setDescription(dto.description());
+
+        return new CategoryResponseDTO(category);
+    }
+
+    public Optional<CategoryEntity> findById(String id) {
+        return Optional.of(this.categoryRepository.findById(UUID.fromString(id)));
     }
 
 }
