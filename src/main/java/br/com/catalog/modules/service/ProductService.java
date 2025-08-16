@@ -40,6 +40,14 @@ public class ProductService {
         return new ProductResponseDTO(product);
     }
 
+    @Transactional
+    public ProductResponseDTO delete(String id) {
+        ProductEntity product = productRepository.findById(UUID.fromString(id));
+        var dto = new ProductResponseDTO(product);
+        productRepository.delete(product);
+        return dto;
+    }
+
     public Optional<ProductEntity> findById(String id) {
         var product = productRepository.findById(UUID.fromString(id));
         return Optional.of(product);

@@ -6,6 +6,7 @@ import br.com.catalog.modules.dto.ProductDTO;
 import br.com.catalog.modules.dto.ProductResponseDTO;
 import br.com.catalog.modules.service.ProductService;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -37,4 +38,11 @@ public class ProductController {
         return Response.ok(dto).build();
     }
 
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") String id) {
+        var dto = productService.delete(id);
+        return Response.ok(dto).build();
+    }
 }

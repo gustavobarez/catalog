@@ -40,6 +40,14 @@ public class CategoryService {
         return new CategoryResponseDTO(category);
     }
 
+    @Transactional
+    public CategoryResponseDTO delete(String id) {
+        CategoryEntity category = categoryRepository.findById(UUID.fromString(id));
+        var dto = new CategoryResponseDTO(category);
+        categoryRepository.delete(category);
+        return dto;
+    }
+
     public Optional<CategoryEntity> findById(String id) {
         return Optional.of(this.categoryRepository.findById(UUID.fromString(id)));
     }

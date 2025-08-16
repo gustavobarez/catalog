@@ -7,6 +7,7 @@ import br.com.catalog.modules.dto.CategoryResponseDTO;
 import br.com.catalog.modules.entity.CategoryEntity;
 import br.com.catalog.modules.service.CategoryService;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -38,6 +39,14 @@ public class CategoryController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(@PathParam("id") String id, CategoryDTO categoryDTO) {
         var dto = categoryService.update(id, categoryDTO);
+        return Response.ok(dto).build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") String id) {
+        var dto = categoryService.delete(id);
         return Response.ok(dto).build();
     }
 
