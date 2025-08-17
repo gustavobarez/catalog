@@ -3,6 +3,7 @@ package br.com.catalog.modules.service;
 import java.util.Optional;
 import java.util.UUID;
 
+import br.com.catalog.exceptions.BusinessRuleException;
 import br.com.catalog.modules.dto.CategoryDTO;
 import br.com.catalog.modules.dto.CategoryResponseDTO;
 import br.com.catalog.modules.entity.CategoryEntity;
@@ -10,6 +11,7 @@ import br.com.catalog.modules.repository.CategoryRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.NotFoundException;
 
 @ApplicationScoped
 public class CategoryService {
@@ -20,23 +22,18 @@ public class CategoryService {
     @Transactional
     public CategoryEntity insert(CategoryDTO dto) {
         CategoryEntity categoryEntity = new CategoryEntity(dto);
-
         categoryRepository.persist(categoryEntity);
-
         return categoryEntity;
     }
 
     @Transactional
     public CategoryResponseDTO update(String id, CategoryDTO dto) {
         CategoryEntity category = categoryRepository.findById(UUID.fromString(id));
-        
-        // if (category == null) {
-        //     throw new
-        // }
-
+        if (category == null) {
+            throw new NotFoundException("Category not found!");
+        }
         category.setTitle(dto.title());
         category.setDescription(dto.description());
-
         return new CategoryResponseDTO(category);
     }
 
@@ -44,12 +41,22 @@ public class CategoryService {
     public CategoryResponseDTO delete(String id) {
         CategoryEntity category = categoryRepository.findById(UUID.fromString(id));
         var dto = new CategoryResponseDTO(category);
-        categoryRepository.delete(category);
+        if (category == null) {
+            throw new NotFoundException("Category not found!");
+        }
+        if (!category.getProducts().isEmpty()) {
+            throw new BusinessRuleException("This category is being used by a product",
+                    category.getProducts().toString());
+        }
         return dto;
     }
 
     public Optional<CategoryEntity> findById(String id) {
-        return Optional.of(this.categoryRepository.findById(UUID.fromString(id)));
+        var category = this.categoryRepository.findById(UUID.fromString(id));
+        if (category == null) {
+            throw new NotFoundException("Category not found!");
+        }
+        return Optional.of(category);
     }
 
 }

@@ -11,6 +11,7 @@ import br.com.catalog.modules.repository.ProductRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.NotFoundException;
 
 @ApplicationScoped
 public class ProductService {
@@ -25,6 +26,9 @@ public class ProductService {
     public ProductEntity insert(ProductDTO dto) {
         ProductEntity product = new ProductEntity(dto);
         var category = categoryRepository.findById(UUID.fromString(dto.categoryId()));
+        if (category == null) {
+            throw new NotFoundException("Category not found!");
+        }
         product.setCategory(category);
         productRepository.persist(product);
         return product;
@@ -33,7 +37,9 @@ public class ProductService {
     @Transactional
     public ProductResponseDTO update(String id, ProductDTO dto) {
         ProductEntity product = productRepository.findById(UUID.fromString(id));
-
+        if (product == null) {
+            throw new NotFoundException("Product not found!");
+        }
         product.setTitle(dto.title());
         product.setDescription(dto.description());
 
@@ -43,6 +49,9 @@ public class ProductService {
     @Transactional
     public ProductResponseDTO delete(String id) {
         ProductEntity product = productRepository.findById(UUID.fromString(id));
+        if (product == null) {
+            throw new NotFoundException("Product not found!");
+        }
         var dto = new ProductResponseDTO(product);
         productRepository.delete(product);
         return dto;
@@ -50,11 +59,17 @@ public class ProductService {
 
     public Optional<ProductEntity> findById(String id) {
         var product = productRepository.findById(UUID.fromString(id));
+        if (product == null) {
+            throw new NotFoundException("Product not found!");
+        }
         return Optional.of(product);
     }
 
     public Optional<ProductEntity> findByTitle(String title) {
         var product = productRepository.findByTitle(title);
+        if (product == null) {
+            throw new NotFoundException("Product not found!");
+        }
         return Optional.of(product);
     }
 
