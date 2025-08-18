@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import br.com.catalog.modules.dto.ProductDTO;
 import io.smallrye.common.constraint.NotNull;
+import io.vertx.core.json.JsonObject;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -51,6 +52,20 @@ public class ProductEntity {
         this.description = dto.description();
         this.price = dto.price();
         this.ownerId = dto.ownerId();
+    }
+
+    @Override
+    public String toString() {
+        JsonObject json = new JsonObject();
+
+        json.put("title", this.title);
+        json.put("description", this.description);
+        json.put("price", this.price);
+        json.put("category", this.category);
+        json.put("ownerId", this.ownerId);
+        json.put("type", "product");
+
+        return json.toString();
     }
 
 }

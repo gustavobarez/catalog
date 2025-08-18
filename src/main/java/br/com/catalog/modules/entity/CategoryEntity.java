@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import br.com.catalog.modules.dto.CategoryDTO;
 import io.smallrye.common.constraint.NotNull;
+import io.vertx.core.json.JsonObject;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,6 +44,18 @@ public class CategoryEntity {
         this.title = categoryDTO.title();
         this.description = categoryDTO.description();
         this.ownerId = categoryDTO.ownerId();
+    }
+
+    @Override
+    public String toString() {
+        JsonObject json = new JsonObject();
+
+        json.put("title", this.title);
+        json.put("description", this.description);
+        json.put("ownerId", this.ownerId);
+        json.put("type", "category");
+
+        return json.toString();
     }
 
 }
