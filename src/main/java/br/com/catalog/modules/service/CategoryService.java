@@ -1,7 +1,9 @@
 package br.com.catalog.modules.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import br.com.catalog.exceptions.BusinessRuleException;
 import br.com.catalog.modules.dto.CategoryDTO;
@@ -49,6 +51,13 @@ public class CategoryService {
                     category.getProducts().toString());
         }
         return dto;
+    }
+
+    public List<CategoryResponseDTO> findAll() {
+        var categories = categoryRepository.findAll().list();
+        return categories.stream()
+                .map(CategoryResponseDTO::new)
+                .collect(Collectors.toList());
     }
 
     public Optional<CategoryEntity> findById(String id) {

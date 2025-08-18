@@ -1,0 +1,25 @@
+meta {
+  name: Create Product
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8080/api/product
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Teste",
+    "description": "Testee",
+    "price": 0.00,
+    "categoryId": "e3aff759-e802-478c-a3c6-b3453434b0f4",
+    "ownerId": "Teste"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

@@ -7,6 +7,7 @@ import br.com.catalog.modules.dto.ProductResponseDTO;
 import br.com.catalog.modules.service.ProductService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -45,4 +46,21 @@ public class ProductController {
         var dto = productService.delete(id);
         return Response.ok(dto).build();
     }
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findById(@PathParam("id") String id) {
+        var product = productService.findById(id);
+        ProductResponseDTO dto = new ProductResponseDTO(product.get());
+        return Response.ok(dto).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findAll() {
+        var products = productService.findAll();
+        return Response.ok(products).build();
+    }
+
 }

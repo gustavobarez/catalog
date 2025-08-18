@@ -1,0 +1,25 @@
+meta {
+  name: Update Product
+  type: http
+  seq: 8
+}
+
+put {
+  url: http://localhost:8080/api/product/dadb36c5-6cbd-41d3-b288-38fb27457e43
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Edit",
+    "description": "Edit",
+    "price": 0.0,
+    "categoryId": "fcb1e8df-c0bc-489b-b3db-08506a293f80",
+    "ownerId": "Edit"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

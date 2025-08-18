@@ -59,4 +59,11 @@ public class CategoryController {
         return Response.ok(dto).build();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findAll() {
+        var categories = categoryService.findAll();
+        return Response.ok(categories).build();
+    }
+
 }

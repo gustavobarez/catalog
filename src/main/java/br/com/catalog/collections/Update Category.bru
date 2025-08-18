@@ -1,0 +1,23 @@
+meta {
+  name: Update Category
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:8080/api/category/6d76a1ea-6e95-4558-9dde-69e10fc38b44
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Edit",
+    "description": "Edit",
+    "ownerId": "Edit"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

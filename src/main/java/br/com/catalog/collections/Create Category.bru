@@ -1,0 +1,23 @@
+meta {
+  name: Create Category
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/api/category
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Teste",
+    "description": "Testee",
+    "ownerId": "Teste"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

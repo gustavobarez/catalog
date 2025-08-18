@@ -1,0 +1,19 @@
+meta {
+  name: Delete Product
+  type: http
+  seq: 9
+}
+
+delete {
+  url: http://localhost:8080/api/category/623f009a-61ab-478b-a742-7317d5bf6ddb
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {}
+}
+
+settings {
+  encodeUrl: true
+}

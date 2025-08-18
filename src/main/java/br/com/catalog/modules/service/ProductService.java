@@ -1,7 +1,9 @@
 package br.com.catalog.modules.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import br.com.catalog.modules.dto.ProductDTO;
 import br.com.catalog.modules.dto.ProductResponseDTO;
@@ -55,6 +57,13 @@ public class ProductService {
         var dto = new ProductResponseDTO(product);
         productRepository.delete(product);
         return dto;
+    }
+
+    public List<ProductResponseDTO> findAll() {
+        var products = productRepository.findAll().list();
+        return products.stream()
+                .map(ProductResponseDTO::new)
+                .collect(Collectors.toList());
     }
 
     public Optional<ProductEntity> findById(String id) {
