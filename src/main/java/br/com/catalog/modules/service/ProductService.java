@@ -10,6 +10,7 @@ import br.com.catalog.modules.dto.ProductResponseDTO;
 import br.com.catalog.modules.entity.ProductEntity;
 import br.com.catalog.modules.repository.CategoryRepository;
 import br.com.catalog.modules.repository.ProductRepository;
+import br.com.catalog.modules.service.aws.CatalogSnsService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -24,6 +25,9 @@ public class ProductService {
     @Inject
     public CategoryRepository categoryRepository;
 
+    @Inject
+    public CatalogSnsService catalogSnsService;
+
     @Transactional
     public ProductEntity insert(ProductDTO dto) {
         ProductEntity product = new ProductEntity(dto);
@@ -33,6 +37,7 @@ public class ProductService {
         }
         product.setCategory(category);
         productRepository.persist(product);
+        catalogSnsService.publish(product.toString());
         return product;
     }
 
@@ -44,7 +49,7 @@ public class ProductService {
         }
         product.setTitle(dto.title());
         product.setDescription(dto.description());
-
+        catalogSnsService.publish(product.toString());
         return new ProductResponseDTO(product);
     }
 
