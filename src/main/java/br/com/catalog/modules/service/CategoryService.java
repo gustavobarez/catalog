@@ -50,6 +50,7 @@ public class CategoryService {
             throw new BusinessRuleException("This category is being used by a product",
                     category.getProducts().toString());
         }
+        categoryRepository.delete(category);
         return dto;
     }
 

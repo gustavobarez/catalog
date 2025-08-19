@@ -28,6 +28,7 @@ public class ProductIT {
 
         @Test
         @Order(1)
+        @DisplayName("Should create a category")
         public void testCreateCategory() {
                 CategoryEntity category = new CategoryEntity(
                                 null,
@@ -60,7 +61,7 @@ public class ProductIT {
 
         @Test
         @Order(2)
-        @DisplayName("Deve criar um produto com sucesso")
+        @DisplayName("Should create a product")
         public void testCreateProduct() {
                 ProductDTO product = new ProductDTO(
                                 "Produto Teste",
@@ -96,7 +97,7 @@ public class ProductIT {
 
         @Test
         @Order(3)
-        @DisplayName("Deve retornar erro ao criar produto com categoria inexistente")
+        @DisplayName("Should return an error if tries to create with a nonexistent category")
         public void testCreateProductWithInvalidCategory() {
                 ProductDTO product = new ProductDTO("Produto Teste",
                                 "Description",
@@ -116,7 +117,7 @@ public class ProductIT {
 
         @Test
         @Order(4)
-        @DisplayName("Deve buscar um produto por ID")
+        @DisplayName("Should search a product by ID")
         public void testGetProduct() {
                 given()
                                 .when()
@@ -129,7 +130,7 @@ public class ProductIT {
 
         @Test
         @Order(5)
-        @DisplayName("Deve atualizar um produto")
+        @DisplayName("Should update a product")
         public void testUpdateProduct() {
                 ProductDTO product = new ProductDTO("Produto Atualizado",
                                 "Nova Descrição",
@@ -150,7 +151,7 @@ public class ProductIT {
 
         @Test
         @Order(6)
-        @DisplayName("Deve deletar um produto")
+        @DisplayName("Should delete a product")
         public void testDeleteProduct() {
                 given()
                                 .when()
