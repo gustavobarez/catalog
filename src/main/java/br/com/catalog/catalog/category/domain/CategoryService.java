@@ -9,15 +9,17 @@ import br.com.catalog.catalog.category.application.CategoryDTO;
 import br.com.catalog.catalog.category.application.CategoryResponseDTO;
 import br.com.catalog.shared.exceptions.BusinessRuleException;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 
 @ApplicationScoped
 public class CategoryService {
 
-    @Inject
     public CategoryRepository categoryRepository;
+
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
     @Transactional
     public CategoryEntity insert(CategoryDTO dto) {

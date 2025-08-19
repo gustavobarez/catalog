@@ -5,31 +5,34 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import br.com.catalog.catalog.category.domain.CategoryRepository;
+import br.com.catalog.catalog.category.domain.CategoryService;
 import br.com.catalog.catalog.product.application.ProductDTO;
 import br.com.catalog.catalog.product.application.ProductResponseDTO;
 import br.com.catalog.notification.infrastructure.aws.CatalogSnsService;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 
 @ApplicationScoped
 public class ProductService {
 
-    @Inject
     public ProductRepository productRepository;
 
-    @Inject
-    public CategoryRepository categoryRepository;
+    public CategoryService categoryService;
 
-    @Inject
     public CatalogSnsService catalogSnsService;
+
+    public ProductService(ProductRepository productRepository, CategoryService categoryService,
+            CatalogSnsService catalogSnsService) {
+        this.productRepository = productRepository;
+        this.categoryService = categoryService;
+        this.catalogSnsService = catalogSnsService;
+    }
 
     @Transactional
     public ProductEntity insert(ProductDTO dto) {
         ProductEntity product = new ProductEntity(dto);
-        var category = categoryRepository.findById(UUID.fromString(dto.categoryId()));
+        var category = categoryService.findById(dto.categoryId()).get();
         if (category == null) {
             throw new NotFoundException("Category not found!");
         }

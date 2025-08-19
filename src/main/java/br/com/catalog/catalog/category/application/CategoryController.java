@@ -10,7 +10,6 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import br.com.catalog.catalog.category.domain.CategoryEntity;
 import br.com.catalog.catalog.category.domain.CategoryService;
-import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -27,8 +26,11 @@ import jakarta.ws.rs.core.UriInfo;
 @Tag(name = "Category", description = "Category management operations")
 public class CategoryController {
 
-    @Inject
     public CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)

@@ -9,7 +9,6 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import br.com.catalog.catalog.product.domain.ProductService;
-import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -25,8 +24,11 @@ import jakarta.ws.rs.core.Response;
 @Tag(name = "Product", description = "Product management operations")
 public class ProductController {
 
-    @Inject
     public ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
