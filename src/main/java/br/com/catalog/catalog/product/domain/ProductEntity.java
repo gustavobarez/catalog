@@ -1,11 +1,12 @@
-package br.com.catalog.modules.entity;
+package br.com.catalog.catalog.product.domain;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import br.com.catalog.modules.dto.ProductDTO;
+import br.com.catalog.catalog.category.domain.CategoryEntity;
+import br.com.catalog.catalog.product.application.ProductDTO;
 import io.smallrye.common.constraint.NotNull;
 import io.vertx.core.json.JsonObject;
 import jakarta.persistence.Column;

@@ -1,16 +1,14 @@
-package br.com.catalog.modules.service;
+package br.com.catalog.catalog.product.domain;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import br.com.catalog.modules.dto.ProductDTO;
-import br.com.catalog.modules.dto.ProductResponseDTO;
-import br.com.catalog.modules.entity.ProductEntity;
-import br.com.catalog.modules.repository.CategoryRepository;
-import br.com.catalog.modules.repository.ProductRepository;
-import br.com.catalog.modules.service.aws.CatalogSnsService;
+import br.com.catalog.catalog.category.domain.CategoryRepository;
+import br.com.catalog.catalog.product.application.ProductDTO;
+import br.com.catalog.catalog.product.application.ProductResponseDTO;
+import br.com.catalog.notification.infrastructure.aws.CatalogSnsService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;

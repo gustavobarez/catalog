@@ -1,4 +1,4 @@
-package br.com.catalog.config;
+package br.com.catalog.shared.config;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;

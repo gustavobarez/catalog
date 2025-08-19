@@ -1,4 +1,4 @@
-package br.com.catalog.modules.service.aws;
+package br.com.catalog.notification.infrastructure.aws;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 

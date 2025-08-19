@@ -1,4 +1,4 @@
-package br.com.catalog.exceptions;
+package br.com.catalog.shared.exceptions;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,8 +1,8 @@
-package br.com.catalog.modules.dto;
+package br.com.catalog.catalog.category.application;
 
 import java.util.UUID;
 
-import br.com.catalog.modules.entity.CategoryEntity;
+import br.com.catalog.catalog.category.domain.CategoryEntity;
 
 public record CategoryResponseDTO(UUID id, String title, String description, String ownerId) {
 

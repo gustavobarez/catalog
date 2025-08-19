@@ -1,4 +1,4 @@
-package br.com.catalog.modules.dto;
+package br.com.catalog.catalog.product.application;
 
 import java.math.BigDecimal;
 

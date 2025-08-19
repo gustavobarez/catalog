@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import br.com.catalog.modules.dto.ProductDTO;
-import br.com.catalog.modules.entity.CategoryEntity;
+import br.com.catalog.catalog.category.domain.CategoryEntity;
+import br.com.catalog.catalog.product.application.ProductDTO;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.quarkus.test.junit.TestProfile;
 import io.restassured.http.ContentType;

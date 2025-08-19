@@ -1,11 +1,12 @@
-package br.com.catalog.modules.entity;
+package br.com.catalog.catalog.category.domain;
 
 import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import br.com.catalog.modules.dto.CategoryDTO;
+import br.com.catalog.catalog.category.application.CategoryDTO;
+import br.com.catalog.catalog.product.domain.ProductEntity;
 import io.smallrye.common.constraint.NotNull;
 import io.vertx.core.json.JsonObject;
 import jakarta.persistence.Column;
@@ -25,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity(name = "category")
 public class CategoryEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;

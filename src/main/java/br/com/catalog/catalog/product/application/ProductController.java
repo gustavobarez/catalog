@@ -1,9 +1,14 @@
-package br.com.catalog.modules.controller;
+package br.com.catalog.catalog.product.application;
 
 import java.net.URI;
-import br.com.catalog.modules.dto.ProductDTO;
-import br.com.catalog.modules.dto.ProductResponseDTO;
-import br.com.catalog.modules.service.ProductService;
+
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+
+import br.com.catalog.catalog.product.domain.ProductService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -15,11 +20,6 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.eclipse.microprofile.openapi.annotations.Operation;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
-import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 
 @Path("/api/product")
 @Tag(name = "Product", description = "Product management operations")

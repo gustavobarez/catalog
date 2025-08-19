@@ -1,15 +1,13 @@
-package br.com.catalog.modules.service;
+package br.com.catalog.catalog.category.domain;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import br.com.catalog.exceptions.BusinessRuleException;
-import br.com.catalog.modules.dto.CategoryDTO;
-import br.com.catalog.modules.dto.CategoryResponseDTO;
-import br.com.catalog.modules.entity.CategoryEntity;
-import br.com.catalog.modules.repository.CategoryRepository;
+import br.com.catalog.catalog.category.application.CategoryDTO;
+import br.com.catalog.catalog.category.application.CategoryResponseDTO;
+import br.com.catalog.shared.exceptions.BusinessRuleException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;

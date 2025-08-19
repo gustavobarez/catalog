@@ -1,10 +1,15 @@
-package br.com.catalog.modules.controller;
+package br.com.catalog.catalog.category.application;
 
 import java.net.URI;
-import br.com.catalog.modules.dto.CategoryDTO;
-import br.com.catalog.modules.dto.CategoryResponseDTO;
-import br.com.catalog.modules.entity.CategoryEntity;
-import br.com.catalog.modules.service.CategoryService;
+
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+
+import br.com.catalog.catalog.category.domain.CategoryEntity;
+import br.com.catalog.catalog.category.domain.CategoryService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -17,11 +22,6 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
-import org.eclipse.microprofile.openapi.annotations.Operation;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
-import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 
 @Path("/api/category")
 @Tag(name = "Category", description = "Category management operations")

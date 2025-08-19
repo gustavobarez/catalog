@@ -1,8 +1,7 @@
-package br.com.catalog.modules.repository;
+package br.com.catalog.catalog.product.domain;
 
 import java.util.UUID;
 
-import br.com.catalog.modules.entity.ProductEntity;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
