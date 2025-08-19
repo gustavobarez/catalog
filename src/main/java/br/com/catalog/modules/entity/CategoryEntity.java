@@ -3,6 +3,8 @@ package br.com.catalog.modules.entity;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.catalog.modules.dto.CategoryDTO;
 import io.smallrye.common.constraint.NotNull;
 import io.vertx.core.json.JsonObject;
@@ -38,6 +40,7 @@ public class CategoryEntity {
     private String ownerId;
 
     @OneToMany(mappedBy = "category")
+    @JsonManagedReference
     private List<ProductEntity> products;
 
     public CategoryEntity(CategoryDTO categoryDTO) {

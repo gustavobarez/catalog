@@ -3,6 +3,8 @@ package br.com.catalog.modules.entity;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.com.catalog.modules.dto.ProductDTO;
 import io.smallrye.common.constraint.NotNull;
 import io.vertx.core.json.JsonObject;
@@ -42,6 +44,7 @@ public class ProductEntity {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     private CategoryEntity category;
 
     @Column(name = "owner_id", nullable = false)
@@ -61,7 +64,14 @@ public class ProductEntity {
         json.put("title", this.title);
         json.put("description", this.description);
         json.put("price", this.price);
-        json.put("category", this.category);
+        try {
+            if (this.category != null) {
+                json.put("categoryId", this.category.getId());
+                json.put("categoryTitle", this.category.getTitle());
+            }
+        } catch (Exception e) {
+            json.put("categoryId", "lazy_not_loaded");
+        }
         json.put("ownerId", this.ownerId);
         json.put("type", "product");
 

@@ -6,6 +6,7 @@ import br.com.catalog.modules.dto.ProductDTO;
 import br.com.catalog.modules.dto.ProductResponseDTO;
 import br.com.catalog.modules.service.ProductService;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -24,6 +25,7 @@ public class ProductController {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response insert(ProductDTO productDTO) {
         var product = productService.insert(productDTO);
         URI location = URI.create("/api/product/" + product.getId());
