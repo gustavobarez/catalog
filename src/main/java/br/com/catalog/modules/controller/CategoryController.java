@@ -55,8 +55,7 @@ public class CategoryController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") String id) {
         var category = categoryService.findById(id).get();
-        CategoryResponseDTO dto = new CategoryResponseDTO(category);
-        return Response.ok(dto).build();
+        return Response.ok(category).build();
     }
 
     @GET
